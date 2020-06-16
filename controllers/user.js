@@ -10,6 +10,7 @@ function user(req, res) {
 async function saveUser(req, res) {
   try {
     // Validate email repeated
+    req.body.email = req.body.email.toLowerCase();
     await validateEmail(req.body.email);
     // Save data
     const resp = await db.save({

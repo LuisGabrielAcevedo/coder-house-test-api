@@ -9,13 +9,7 @@ const body_parser = require("body-parser");
 app.use(body_parser.urlencoded({ extended: false }));
 app.use(body_parser.json());
 
-// 3. Routes
-const userRoutes = require("./routes/user");
-app.use("/v1", userRoutes);
-const taskRoutes = require("./routes/task");
-app.use("/v1", taskRoutes);
-
-// 4. Cors
+// 3. Cors
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -26,5 +20,11 @@ app.use((req, res, next) => {
   res.header("Allow", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
+
+// 4. Routes
+const userRoutes = require("./routes/user");
+app.use("/v1", userRoutes);
+const taskRoutes = require("./routes/task");
+app.use("/v1", taskRoutes);
 
 module.exports = app;
